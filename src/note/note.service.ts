@@ -5,7 +5,19 @@ import {v4 as uuidv4} from 'uuid';
 import { takeLast } from 'rxjs';
 @Injectable()
 export class NoteService {
-    private notes: Note[] = [];
+    private notes: Note[] = [
+        {
+            "id": "347d2eae-1acb-46b5-96f3-84c26583a281",
+            "note_title": "Web dev note",
+            "description": "This is Web dev notes"
+        },
+        {
+                "id": "ab1c9aab-ae36-4db3-ada4-14ddf3b50fa7",
+                "note_title": "Group 3-C note",
+                "description": "This is Group 3-C Web dev notes"
+        }
+        
+    ];
 
    getNotes(): Note[]{
     return this.notes;
