@@ -1,17 +1,28 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get,Req, Res, Param, Patch, Post, UsePipes } from '@nestjs/common';
 import { Note } from './note.model';
 import { CreateNoteDto } from 'src/dtos/create-note.dto';
 import { NoteService } from './note.service';
+import { Request,Response } from 'express';
 @Controller('notes')
 export class NoteController {
 
     constructor(private noteService: NoteService){}
 
+  
     @Get(':id')
-    getNote(@Param('id')id: string): Note{
-        return this.noteService.getNote(id);
-    }
-    
+    getNote(@Param('id')id: string,
+    @Req() req:Request,
+    @Res() res:Response,
+    )
+    {
+        const note = this.noteService.findNoteById(id);
+        if(note){
+            res.send(note)
+        }else{
+            res.status(400).send({ message:'Notes not found!' });
+            return note;
+        }
+    }  
     @Get()
     getNotes(): Note[]{
         return this.noteService.getNotes();

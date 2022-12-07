@@ -23,6 +23,10 @@ export class NoteService {
     return this.notes;
    } 
 
+   findNoteById(id:uuidv4){
+    return this.notes.find((note) => note.id === id);
+   }
+
    getNote(id: string): Note{
     const note = this.notes.find(note => note.id == id);
     if(!note){
